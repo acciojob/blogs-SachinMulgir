@@ -26,6 +26,8 @@ public class BlogService {
         //create a blog at the current time
         User user = this.userRepository1.findById(userId).get();
 
+        if( user == null )return null;
+
         //blog
         Blog blog = new Blog();
         blog.setContent(content);
@@ -44,6 +46,8 @@ public class BlogService {
     public void deleteBlog(int blogId){
         //delete blog and corresponding images
         Blog blog = this.blogRepository1.findById(blogId).get();
+
+        if( blog == null )return;
 
         //get assigned user:
         User user = blog.getUser();
