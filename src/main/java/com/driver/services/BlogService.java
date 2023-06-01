@@ -33,6 +33,7 @@ public class BlogService {
         blog.setContent(content);
         blog.setTitle(title);
         blog.setUser(user);
+        blog = this.blogRepository1.save(blog);
 
         //relational mapping of blog:
         List<Blog> blogList = user.getBlogList();
