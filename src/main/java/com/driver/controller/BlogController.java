@@ -13,17 +13,22 @@ import java.util.List;
 @RequestMapping("/blogs")
 public class BlogController {
 
-    @PostMapping
+    @Autowired
+    BlogService blogService;
+
+    @PostMapping("/create")
     public ResponseEntity createBlog(@RequestParam Integer userId ,
                                      @RequestParam String title,
                                      @RequestParam String content) {
         // Create a blog and add it under given user
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        this.blogService.createAndReturnBlog(userId, title, content);
+        return new ResponseEntity<>("Blog created", HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{blogId}")
     public ResponseEntity<Void> deleteBlog(@PathVariable int blogId) {
         // Delete the blog using deleteById
+        this.blogService.deleteBlog(blogId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
